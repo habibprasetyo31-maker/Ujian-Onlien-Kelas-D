@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "text": "Apa ibu kota Indonesia?",
+    "options": [
+      "Jakarta",
+      "Bandung",
+      "Surabaya",
+      "Medan"
+    ],
+    "correct": "Jakarta"
+  },
+  {
+    "id": 2,
+    "text": "Hasil dari 2 + 2 adalah?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": "4"
+  },
+  {
+    "id": 3,
+    "text": "Lambang sila pertama Pancasila adalah?",
+    "options": [
+      "Pohon Beringin",
+      "Bintang",
+      "Rantai",
+      "Banteng"
+    ],
+    "correct": "Bintang"
+  }
+]

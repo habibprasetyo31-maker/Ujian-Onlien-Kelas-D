@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ujian Online - Kelas D</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login-page" class="page">
+    <h1>🔐 Masuk Ujian</h1>
+    <input type="text" id="student-name" placeholder="Nama Lengkap" required><br>
+    <input type="text" id="student-nim" placeholder="NIM" required><br>
+    <input type="text" id="student-class" placeholder="Kelas" required><br>
+    <button onclick="startExam()">Mulai Ujian</button>
+  </div>
+
+  <div id="exam-page" class="page" style="display:none;">
+    <div class="header">
+      <h2>📝 Ujian Sedang Berlangsung</h2>
+      <div id="timer">Waktu: 00:00</div>
+    </div>
+    <div id="question-numbers"></div>
+    <div id="questions"></div>
+    <button id="submit-btn" onclick="submitExam()">Kirim Jawaban</button>
+  </div>
+
+  <div id="result-page" class="page" style="display:none;">
+    <h2>📊 Hasil Ujian</h2>
+    <p id="result-text"></p>
+    <a href="result.html">Lihat Rekap Hasil</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
