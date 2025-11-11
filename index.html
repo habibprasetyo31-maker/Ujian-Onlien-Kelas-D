@@ -2,10 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ujian Online - Kelas D</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Pastikan file ini ada di folder yang sama -->
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <!-- ===================== HALAMAN LOGIN ===================== -->
   <div id="login-page" class="page">
     <h1>🔐 Masuk Ujian</h1>
     <input type="text" id="student-name" placeholder="Nama Lengkap" required><br>
@@ -14,22 +18,27 @@
     <button onclick="startExam()">Mulai Ujian</button>
   </div>
 
+  <!-- ===================== HALAMAN UJIAN ===================== -->
   <div id="exam-page" class="page" style="display:none;">
     <div class="header">
       <h2>📝 Ujian Sedang Berlangsung</h2>
       <div id="timer">Waktu: 00:00</div>
     </div>
-    <div id="question-numbers"></div>
-    <div id="questions"></div>
+
+    <div id="question-numbers" class="number-container"></div>
+    <div id="questions" class="question-container"></div>
+
     <button id="submit-btn" onclick="submitExam()">Kirim Jawaban</button>
   </div>
 
+  <!-- ===================== HALAMAN HASIL ===================== -->
   <div id="result-page" class="page" style="display:none;">
     <h2>📊 Hasil Ujian</h2>
     <p id="result-text"></p>
-    <a href="result.html">Lihat Rekap Hasil</a>
+    <a href="./result.html">Lihat Rekap Hasil</a>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Pastikan urutan script di bawah, agar elemen HTML sudah termuat -->
+  <script src="./script.js"></script>
 </body>
 </html>
