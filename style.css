@@ -1,68 +1,76 @@
-/* =====================
-   Style Ujian Online
-===================== */
-
+/* ====== Tampilan Umum ====== */
 body {
   font-family: Arial, sans-serif;
-  background: #f5f7fa;
+  background-color: #f4f6f9;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
-/* Halaman utama */
 .page {
+  background: white;
+  margin-top: 40px;
+  padding: 25px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   width: 90%;
   max-width: 800px;
-  background: white;
-  margin: 40px auto;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Input & tombol login */
+h1, h2 {
+  text-align: center;
+  color: #222;
+}
+
 input {
-  margin: 8px 0;
+  display: block;
+  margin: 10px auto;
   padding: 10px;
   width: 80%;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 14px;
 }
 
 button {
-  padding: 10px 20px;
+  display: block;
+  margin: 15px auto;
+  padding: 10px 25px;
+  font-size: 16px;
   background: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 button:hover {
   background: #0056b3;
 }
 
-/* Nomor soal */
+/* ====== Soal ====== */
 #question-numbers {
-  margin-bottom: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: flex-start;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .number-btn {
-  background: #e0e0e0;
+  margin: 3px;
+  padding: 6px 12px;
   border: none;
   border-radius: 5px;
+  background: #ddd;
   cursor: pointer;
-  padding: 6px 10px;
-  font-weight: bold;
+  transition: 0.2s;
+}
+
+.number-btn:hover {
+  background: #007bff;
+  color: white;
 }
 
 .number-btn.answered {
@@ -70,44 +78,45 @@ button:hover {
   color: white;
 }
 
-/* Soal */
-.question-container {
-  margin-bottom: 20px;
+#questions {
+  margin-top: 20px;
 }
 
 .question {
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+  margin-bottom: 25px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
-label {
+.options label {
   display: block;
-  margin-left: 15px;
+  margin: 5px 0;
+  cursor: pointer;
 }
 
-/* Tombol kirim */
-#submit-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 12px 25px;
-  font-size: 16px;
+/* ====== Timer ====== */
+#timer {
   font-weight: bold;
+  color: #d9534f;
+  text-align: right;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-/* Hasil ujian */
+/* ====== Hasil ====== */
+#result-page {
+  text-align: center;
+}
+
 table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
 }
 
 th, td {
   border: 1px solid #ccc;
   padding: 8px;
-  text-align: left;
 }
 
 th {
