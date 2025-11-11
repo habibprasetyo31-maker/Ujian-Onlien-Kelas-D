@@ -3,54 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ujian Online - Kelas D</title>
-  <link rel="stylesheet" href="./style.css" />
+  <title>Ujian Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ================== LOGIN PAGE ================== -->
+
+  <!-- ================= HALAMAN LOGIN ================= -->
   <div id="login-page" class="page">
-    <h1>🔐 Masuk Ujian</h1>
-    <input type="text" id="student-name" placeholder="Nama Lengkap" required /><br />
-    <input type="text" id="student-nim" placeholder="NIM" required /><br />
-    <input type="text" id="student-class" placeholder="Kelas" required /><br />
-    <button onclick="startExam()">Mulai Ujian</button>
-  </div>
-<div class="main-container">
-  <!-- Kolom kiri: Soal -->
-  <div class="left-content">
-    <div id="questions"></div>
-    <div id="navigation-buttons">
-      <button id="prev-btn">Sebelumnya</button>
-      <button id="next-btn">Selanjutnya</button>
-      <button id="submit-btn">Kirim Jawaban</button>
+    <div class="login-box">
+      <h2>Ujian Online</h2>
+      <input type="text" id="student-name" placeholder="Nama Lengkap">
+      <input type="text" id="student-nim" placeholder="NIM">
+      <input type="text" id="student-class" placeholder="Kelas">
+      <button onclick="startExam()">Mulai Ujian</button>
     </div>
   </div>
 
-  <!-- Kolom kanan: Timer & Nomor Soal -->
-  <div class="right-sidebar">
-    <div id="timer">Waktu: 00:00</div>
-    <div id="question-numbers"></div>
-  </div>
-</div>
-
-  <!-- ================== EXAM PAGE ================== -->
+  <!-- ================= HALAMAN UJIAN ================= -->
   <div id="exam-page" class="page" style="display:none;">
-    <div class="header">
-      <h2>📝 Ujian Sedang Berlangsung</h2>
-      <div id="timer">Waktu: 00:00</div>
+    <div class="exam-container">
+      <div class="question-area">
+        <h2>Soal Ujian</h2>
+        <p id="timer" class="timer">Waktu: 5:00</p>
+        <div id="questions"></div>
+        <button onclick="submitExam()">Kirim Jawaban</button>
+      </div>
+
+      <div class="sidebar">
+        <h3>Nomor Soal</h3>
+        <div id="question-numbers"></div>
+      </div>
     </div>
-    <div id="question-numbers" class="number-container"></div>
-    <div id="questions" class="question-container"></div>
-    <button id="submit-btn" onclick="submitExam()">Kirim Jawaban</button>
   </div>
 
-  <!-- ================== RESULT PAGE ================== -->
+  <!-- ================= HALAMAN HASIL ================= -->
   <div id="result-page" class="page" style="display:none;">
-    <h2>📊 Hasil Ujian</h2>
+    <h2>Hasil Ujian</h2>
     <p id="result-text"></p>
-    <a href="./result.html">Lihat Rekap Hasil</a>
   </div>
 
-  <script src="./script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
