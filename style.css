@@ -1,179 +1,167 @@
-/* ===== Umum ===== */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #eef3f8;
+  font-family: Arial, sans-serif;
+  background-color: #eaf6fb;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   min-height: 100vh;
-  color: #333;
 }
 
-/* ===== Layout Utama ===== */
-.main-container {
-  display: flex;
-  gap: 25px;
-  width: 90%;
-  max-width: 1200px;
-  margin-top: 30px;
-}
-
-/* ===== Kolom Soal ===== */
-.left-content {
-  flex: 3;
-  background: #ffffff;
+/* ===== LOGIN PAGE ===== */
+.login-box {
+  background: #fff;
+  width: 350px;
+  margin: 100px auto;
   padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ===== Kolom Navigasi & Timer ===== */
-.right-sidebar {
-  flex: 1;
-  position: sticky;
-  top: 25px;
-  align-self: flex-start;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-/* ===== Timer ===== */
-#timer {
-  font-size: 20px;
-  font-weight: bold;
-  color: #dc3545;
-  margin-bottom: 15px;
-}
-
-/* ===== Navigasi Nomor Soal ===== */
-#question-numbers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.number-btn {
-  width: 40px;
-  height: 40px;
-  background: #e3e6ea;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.25s ease;
-}
-
-.number-btn:hover {
-  background: #007bff;
-  color: white;
-}
-
-.number-btn.answered {
-  background: #28a745;
-  color: white;
-}
-
-/* ===== Soal ===== */
-.question {
-  margin-bottom: 25px;
-  padding: 20px;
-  background: #fdfdfd;
-  border: 1px solid #dcdcdc;
-  border-radius: 10px;
-  transition: box-shadow 0.2s ease;
-}
-
-.question:hover {
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-.question h3 {
-  font-size: 17px;
-  margin-bottom: 10px;
+.login-box h2 {
+  margin-bottom: 20px;
   color: #333;
 }
 
-/* ===== Opsi Jawaban ===== */
-.options label {
-  display: block;
-  margin: 8px 0;
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: background 0.2s;
+.login-box input {
+  width: 90%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
-.options label:hover {
-  background: #eaf2ff;
-}
-
-/* ===== Tombol Navigasi ===== */
-button {
-  padding: 10px 20px;
+.login-box button {
   background: #007bff;
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  margin: 5px;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
-button:hover {
+.login-box button:hover {
   background: #0056b3;
 }
 
-#submit-btn {
-  background: #28a745;
+/* ===== EXAM PAGE ===== */
+.exam-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
+  width: 90%;
+  margin: 30px auto;
 }
 
-#submit-btn:hover {
-  background: #218838;
+.question-area {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* ===== Halaman Hasil ===== */
+.question-area h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+#timer {
+  text-align: right;
+  color: red;
+  font-weight: bold;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  z-index: 100;
+}
+
+#questions .question {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+#questions label {
+  display: block;
+  margin: 5px 0;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.2s;
+}
+
+#questions label:hover {
+  background: #f0f8ff;
+}
+
+/* ===== SIDEBAR NAV ===== */
+.sidebar {
+  width: 160px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.sidebar h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.question-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.number {
+  width: 35px;
+  height: 35px;
+  background-color: #ccc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.number:hover {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.number.answered {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* ===== RESULT PAGE ===== */
 #result-page {
   text-align: center;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  margin: 40px auto;
+  margin-top: 100px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 25px;
-}
-
-th, td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background: #f1f3f6;
-}
-
-/* ===== Responsif ===== */
-@media (max-width: 900px) {
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .right-sidebar {
-    position: static;
-    width: 100%;
-    margin-top: 15px;
-  }
+#result-text {
+  font-size: 18px;
+  color: #333;
 }
