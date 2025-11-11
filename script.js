@@ -2,22 +2,21 @@ let questions = [];
 let timerInterval;
 let totalSeconds = 0;
 
-// ==================== LOAD SOAL DARI JSON ====================
+// =============== LOAD SOAL DARI JSON =================
 async function loadQuestions() {
   try {
-    const response = await fetch('questions.json', { cache: 'no-store' });
+    const response = await fetch('./questions.json', { cache: 'no-store' });
     if (!response.ok) throw new Error("Gagal memuat questions.json");
 
     const data = await response.json();
-    // Acak urutan soal
     questions = data.sort(() => Math.random() - 0.5);
   } catch (error) {
     console.error("Gagal memuat soal:", error);
-    alert("Gagal memuat soal! Pastikan file questions.json ada di folder yang sama.");
+    alert("Soal gagal dimuat. Pastikan file questions.json ada di GitHub repository yang sama.");
   }
 }
 
-// ==================== MULAI UJIAN ====================
+// =============== MULAI UJIAN =================
 function startExam() {
   const name = document.getElementById('student-name').value.trim();
   const nim = document.getElementById('student-nim').value.trim();
@@ -26,6 +25,11 @@ function startExam() {
   if (!name || !nim || !cls) {
     alert('Mohon isi nama, NIM, dan kelas terlebih dahulu.');
     return;
+  }
+
+  // Aktifkan mode fullscreen
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
   }
 
   document.getElementById('login-page').style.display = 'none';
@@ -38,7 +42,7 @@ function startExam() {
   });
 }
 
-// ==================== RENDER SOAL ====================
+// =============== TAMPILKAN SOAL =================
 function renderQuestions() {
   const container = document.getElementById('questions');
   container.innerHTML = '';
@@ -64,7 +68,7 @@ function renderQuestions() {
   });
 }
 
-// ==================== NAVIGASI NOMOR SOAL ====================
+// =============== NOMOR SOAL =================
 function renderQuestionNumbers() {
   const container = document.getElementById('question-numbers');
   container.innerHTML = '';
@@ -79,22 +83,22 @@ function renderQuestionNumbers() {
   });
 }
 
-// ==================== UBAH WARNA SAAT DIJAWAB ====================
+// =============== TANDAI JAWABAN =================
 function markAnswered(index) {
   const btn = document.getElementById(`qnum-${index}`);
   btn.classList.add('answered');
 }
 
-// ==================== SCROLL KE NOMOR ====================
+// =============== SCROLL KE SOAL =================
 function scrollToQuestion(index) {
   const el = document.getElementById(`question-${index}`);
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ==================== TIMER OTOMATIS ====================
+// =============== TIMER OTOMATIS =================
 function startTimer() {
   const totalQuestions = questions.length;
-  totalSeconds = totalQuestions * 70; // 70 detik per soal
+  totalSeconds = totalQuestions * 70;
   const timerElement = document.getElementById('timer');
 
   function updateTimer() {
@@ -104,8 +108,8 @@ function startTimer() {
 
     if (totalSeconds <= 0) {
       clearInterval(timerInterval);
-      alert('Waktu habis! Jawaban akan dikirim otomatis.');
-      submitExam(true); // true = otomatis kirim
+      alert('Waktu habis! Jawaban dikirim otomatis.');
+      submitExam(true);
     }
 
     totalSeconds--;
@@ -115,8 +119,8 @@ function startTimer() {
   timerInterval = setInterval(updateTimer, 1000);
 }
 
-// ==================== KIRIM JAWABAN KE GOOGLE SHEET ====================
-async function submitExam(autoSubmit = false) {
+// =============== KIRIM JAWABAN =================
+function submitExam(autoSubmit = false) {
   if (!autoSubmit) {
     const confirmSubmit = confirm('Apakah Anda yakin ingin mengirim jawaban sekarang?');
     if (!confirmSubmit) return;
@@ -125,7 +129,6 @@ async function submitExam(autoSubmit = false) {
   clearInterval(timerInterval);
 
   let correctCount = 0;
-
   questions.forEach((q) => {
     const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
     if (selected && selected.value === q.correct) {
@@ -135,48 +138,36 @@ async function submitExam(autoSubmit = false) {
 
   const score = ((correctCount / questions.length) * 100).toFixed(2);
 
-  // 🔧 AMBIL DATA PESERTA
   const name = document.getElementById('student-name').value.trim();
   const nim = document.getElementById('student-nim').value.trim();
   const cls = document.getElementById('student-class').value.trim();
 
-  // 🔧 LINK GOOGLE SCRIPT (SUDAH SESUAI DENGAN KAMU)
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzJOD4gdNTto5bFeHF_YZpJthHJiCtM9UMXd9Zd67yd3uepKTJC8_iWqEJSJAFyf4vX/exec";
+  // Simpan ke localStorage
+  const result = { name, nim, cls, score, time: new Date().toLocaleString() };
+  const allResults = JSON.parse(localStorage.getItem('examResults') || '[]');
+  allResults.push(result);
+  localStorage.setItem('examResults', JSON.stringify(allResults));
 
-  // 🔧 KIRIM DATA KE GOOGLE SHEET
-  try {
-    await fetch(scriptURL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name,
-        nim: nim,
-        class: cls,
-        score: score,
-        correctCount: correctCount,
-        totalQuestions: questions.length,
-      }),
-    });
-  } catch (err) {
-    console.error("Gagal kirim data ke Google Sheet:", err);
-  }
+  // Kirim ke Google Sheet
+  fetch('https://script.google.com/macros/s/AKfycbzJOD4gdNTto5bFeHF_YZpJthHJiCtM9UMXd9Zd67yd3uepKTJC8_iWqEJSJAFyf4vX/exec', {
+    method: 'POST',
+    body: JSON.stringify(result),
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-  // 🔧 TAMPILKAN HASIL KE PESERTA
   document.getElementById('exam-page').style.display = 'none';
   document.getElementById('result-page').style.display = 'flex';
-  document.getElementById('result-text').innerHTML = `
-    <h2>Hasil Ujian Anda</h2>
-    <table border="1" style="border-collapse:collapse; width:100%;">
-      <tr><th>Nama</th><td>${name}</td></tr>
-      <tr><th>NIM</th><td>${nim}</td></tr>
-      <tr><th>Kelas</th><td>${cls}</td></tr>
-      <tr><th>Nilai</th><td>${score}</td></tr>
-      <tr><th>Benar</th><td>${correctCount}</td></tr>
-      <tr><th>Total Soal</th><td>${questions.length}</td></tr>
-    </table>
-    <p style="color:green; font-weight:bold; margin-top:10px;">
-      ✅ Hasil Anda sudah otomatis dikirim ke sistem.
-    </p>
-  `;
+  document.getElementById('result-text').textContent = 
+    `Nilai Anda: ${score} (${correctCount} dari ${questions.length} benar)`;
+
+  // Nonaktifkan fullscreen
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
 }
+
+// =============== ANTI KECURANGAN =================
+window.addEventListener('blur', () => {
+  alert("Anda meninggalkan halaman ujian! Ujian otomatis dikirim.");
+  submitExam(true);
+});
